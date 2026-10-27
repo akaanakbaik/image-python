@@ -23,5 +23,5 @@ RUN apt-get update \
 WORKDIR /home/container
 USER container
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/bin/bash", "-c"]
-CMD ["exec ${STARTUP:-python --version}"]
+COPY --chown=1000:1000 entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/usr/bin/tini", "--", "/bin/bash", "/entrypoint.sh"]
